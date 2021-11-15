@@ -1,1 +1,1 @@
-export const BASE_URL = "http://movie-mania-backend.herokuapp.com";
+export const BASE_URL = "https://movie-mania-backend.herokuapp.com";
