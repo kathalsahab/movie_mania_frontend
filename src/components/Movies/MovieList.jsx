@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { Button, Table } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import moment from "moment";
+import { BASE_URL } from "../../utils/constants";
 const MovieList = ({ movies, setedit, setloading }) => {
     const deleteMovie = async function fetchMovies(id) {
         setloading(true);
         let response = await fetch(
-            `http://localhost:5000/api/v1/movie/edit?movie_id=${id}`,
+            `${BASE_URL}/api/v1/movie/edit?movie_id=${id}`,
             {
                 method: "DELETE",
             }

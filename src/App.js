@@ -9,6 +9,7 @@ import ModalForm from "./components/Movies/Forms/ModalForm";
 import "./App.css";
 import { MySearch } from "./components/Search";
 import { GenreFilter } from "./components/Filter";
+import { BASE_URL } from "./utils/constants";
 
 const { Header, Content } = Layout;
 
@@ -25,7 +26,7 @@ const App = () => {
     const [genreId, setGenreId] = useState("");
 
     async function fetchMovies() {
-        let response = await fetch("http://localhost:5000/api/v1/movie");
+        let response = await fetch(`${BASE_URL}/api/v1/movie`);
         response = await response.json();
         if (response.success === true) {
             setMovies(response.data);
@@ -33,7 +34,7 @@ const App = () => {
     }
 
     async function fetchGenres() {
-        let response = await fetch("http://localhost:5000/api/v1/movie/genre");
+        let response = await fetch(`${BASE_URL}/api/v1/movie/genre`);
         response = await response.json();
         if (response.success === true) {
             setGenres(response.data);
@@ -60,7 +61,7 @@ const App = () => {
     };
     async function addMovie(values) {
         setloading(true);
-        let response = await fetch("http://localhost:5000/api/v1/movie", {
+        let response = await fetch(`${BASE_URL}/api/v1/movie`, {
             method: "POST",
             body: JSON.stringify(values),
             headers: {
@@ -78,7 +79,7 @@ const App = () => {
         setloading(true);
 
         const editBody = { ...values, movie_id: edit.movie_id };
-        let response = await fetch(`http://localhost:5000/api/v1/movie/edit`, {
+        let response = await fetch(`${BASE_URL}/api/v1/movie/edit`, {
             method: "PUT",
             body: JSON.stringify(editBody),
             headers: {
@@ -114,8 +115,8 @@ const App = () => {
 
     async function searchMovies(x) {
         const url = genreId
-            ? `http://localhost:5000/api/v1/movie?title=${x}&genre_id=${genreId}`
-            : `http://localhost:5000/api/v1/movie?title=${x}`;
+            ? `${BASE_URL}/api/v1/movie?title=${x}&genre_id=${genreId}`
+            : `${BASE_URL}/api/v1/movie?title=${x}`;
 
         let response = await fetch(url);
         response = await response.json();
@@ -126,7 +127,7 @@ const App = () => {
 
     async function filterMovies(genre_id) {
         let response = await fetch(
-            `http://localhost:5000/api/v1/movie?genre_id=${genre_id}`
+            `${BASE_URL}/api/v1/movie?genre_id=${genre_id}`
         );
         response = await response.json();
         if (response.success === true) {
